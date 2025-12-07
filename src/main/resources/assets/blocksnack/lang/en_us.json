@@ -1,0 +1,13 @@
+{
+  "itemGroup.blocksnack": "Example Mod Tab",
+  "block.blocksnack.example_block": "Example Block",
+  "item.blocksnack.example_item": "Example Item",
+
+  "blocksnack.configuration.title": "Block Snack Configs",
+  "blocksnack.configuration.section.blocksnack.common.toml": "Block Snack Configs",
+  "blocksnack.configuration.section.blocksnack.common.toml.title": "Block Snack Configs",
+  "blocksnack.configuration.items": "Item List",
+  "blocksnack.configuration.logDirtBlock": "Log Dirt Block",
+  "blocksnack.configuration.magicNumberIntroduction": "Magic Number Text",
+  "blocksnack.configuration.magicNumber": "Magic Number"
+}
