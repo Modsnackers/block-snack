@@ -1,6 +1,7 @@
 {
-  "block.blocksnack.terracotta_brick": "Terracotta Brick",
   "item.blocksnack.terracotta_brick": "Terracotta Brick",
+  "block.blocksnack.terracotta_bricks": "Terracotta Bricks",
+  "item.blocksnack.terracotta_bricks": "Terracotta Bricks",
 
   "blocksnack.configuration.title": "Block Snack Configs",
   "blocksnack.configuration.section.blocksnack.common.toml": "Block Snack Configs",
