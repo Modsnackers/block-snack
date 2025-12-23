@@ -33,6 +33,9 @@ public class BlockSnack {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        // Register items for this mod
+        ModItems.register(modEventBus);
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -45,6 +48,9 @@ public class BlockSnack {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModItems.TERRACOTTA_BRICK);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
