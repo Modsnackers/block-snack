@@ -19,17 +19,33 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 @EventBusSubscriber(modid = BlockSnack.MODID, value = Dist.CLIENT)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent.Client event) {
+    public static void gatherClientData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        // The run parameter may not be set correctly, but we'll see. :)
+        gatherModData(generator, lookupProvider);
+    }
+
+    @SubscribeEvent
+    public static void gatherServerData(GatherDataEvent.Server event) {
+        DataGenerator generator = event.getGenerator();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+        gatherModData(generator, lookupProvider);
+    }
+
+    private static void gatherModData(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        PackOutput packOutput = generator.getPackOutput();
+
         generator.addProvider(true, new LootTableProvider(
             packOutput,
             Collections.emptySet(),
             List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)),
             lookupProvider)
         );
+        // Add Mod Recipe Provider
+        // Add Mod Block Tags Provider
+        // Add Mod Item Tags Provider
+        generator.addProvider(true, new ModModelProvider(packOutput));
     }
 }
