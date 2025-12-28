@@ -35,7 +35,7 @@ public class DataGenerators {
             List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)),
             lookupProvider)
         );
-        // Add Mod Block Tags Provider
+        generator.addProvider(true, new ModBlockTagProvider(packOutput, lookupProvider));
         // Add Mod Item Tags Provider
         generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new ModModelProvider(packOutput));
