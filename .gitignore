@@ -14,4 +14,9 @@ run
 build
 .gradle
 
+# DataGen output files
 src/generated/*
+
+# Only store Paint.NET files in baseImages
+baseImages/*
+!baseImages/*.pdn
