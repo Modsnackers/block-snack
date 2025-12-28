@@ -36,7 +36,7 @@ public class DataGenerators {
             lookupProvider)
         );
         generator.addProvider(true, new ModBlockTagProvider(packOutput, lookupProvider));
-        // Add Mod Item Tags Provider
+        generator.addProvider(true, new ModItemTagProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new ModModelProvider(packOutput));
     }
