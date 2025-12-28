@@ -13,3 +13,5 @@ run
 # gradle
 build
 .gradle
+
+src/generated/*

@@ -11,26 +11,18 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@EventBusSubscriber(modid = BlockSnack.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = BlockSnack.MODID)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherClientData(GatherDataEvent.Client event) {
+    public static void gatherData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        gatherModData(generator, lookupProvider);
-    }
-
-    @SubscribeEvent
-    public static void gatherServerData(GatherDataEvent.Server event) {
-        DataGenerator generator = event.getGenerator();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-
+        BlockSnack.LOGGER.info("gatherClientData");
         gatherModData(generator, lookupProvider);
     }
 
@@ -43,9 +35,9 @@ public class DataGenerators {
             List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)),
             lookupProvider)
         );
-        // Add Mod Recipe Provider
         // Add Mod Block Tags Provider
         // Add Mod Item Tags Provider
+        generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new ModModelProvider(packOutput));
     }
 }
