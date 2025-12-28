@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": "minecraft:terracotta",
-    "result": {
-        "count": 4,
-        "id": "blocksnack:terracotta_brick"
-    }
-}
