@@ -1,9 +1,6 @@
 package com.mindfair.modsnackers.blocksnack;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
-import java.util.List;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
