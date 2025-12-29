@@ -8,6 +8,7 @@ import com.mindfair.modsnackers.blocksnack.ModTags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
@@ -18,9 +19,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        addTagsForTerracottaBrick(ModItems.TERRACOTTA_BRICK.get());
+    }
+
+    private void addTagsForTerracottaBrick(Item terracottaBrickItem) {
         tag(Tags.Items.BRICKS)
-            .add(ModItems.TERRACOTTA_BRICK.get());
+            .add(terracottaBrickItem);
         tag(ModTags.Items.BRICKS_TERRACOTTA)
-            .add(ModItems.TERRACOTTA_BRICK.get());
+            .add(terracottaBrickItem);
     }
 }
