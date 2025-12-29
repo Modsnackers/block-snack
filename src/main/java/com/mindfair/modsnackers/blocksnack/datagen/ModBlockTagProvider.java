@@ -8,6 +8,7 @@ import com.mindfair.modsnackers.blocksnack.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 
 public class ModBlockTagProvider extends BlockTagsProvider {
@@ -17,7 +18,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        addTagsForTerracottaBricks(ModBlocks.TERRACOTTA_BRICKS.get());
+    }
+
+    private void addTagsForTerracottaBricks(Block terracottaBricksBlock) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(ModBlocks.TERRACOTTA_BRICKS.get());
+            .add(terracottaBricksBlock);
     }
 }
