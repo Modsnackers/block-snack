@@ -13,13 +13,20 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BlockSnack.MODID);
     
     // Creates a new Block with the id "blocksnack:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> TERRACOTTA_BRICKS = BLOCKS.register(
-        "terracotta_bricks",
-        registryName -> new Block(BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, registryName))
-            .requiresCorrectToolForDrops()
-            .destroyTime(1.85f)
-            .explosionResistance(5.0f)));    
+    public static final DeferredBlock<Block> TERRACOTTA_BRICKS = registerTerracottaBricks(TerracottaColors.NONE);
+
+    private static DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color) {
+        String name = (color == TerracottaColors.NONE ? "terracotta_bricks" : String.format("%s_terracotta_bricks", color));
+        return BLOCKS.register(
+            name,
+            registryName -> new Block(BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .requiresCorrectToolForDrops()
+                .destroyTime(1.85f)
+                .explosionResistance(5.0f)
+            )
+        );
+    }
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
