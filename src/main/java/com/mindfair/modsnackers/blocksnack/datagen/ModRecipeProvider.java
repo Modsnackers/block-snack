@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.mindfair.modsnackers.blocksnack.ModBlocks;
 import com.mindfair.modsnackers.blocksnack.ModItems;
+import com.mindfair.modsnackers.blocksnack.TerracottaColors;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -37,8 +38,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.MISC, ModItems.TERRACOTTA_BRICK, 4)
-        .unlockedBy("has_terracotta_brick", this.has(ModItems.TERRACOTTA_BRICK))
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.MISC, ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE), 4)
+        .unlockedBy("has_terracotta_brick", this.has(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE)))
         .save(this.output, "terracotta_brick_from_terracotta_stonecutting");;
         
         shaped(
@@ -46,8 +47,8 @@ public class ModRecipeProvider extends RecipeProvider {
             ModBlocks.TERRACOTTA_BRICKS.get())
             .pattern ("AA")
             .pattern ("AA")
-            .define ('A', ModItems.TERRACOTTA_BRICK.get())
-            .unlockedBy("has_terracotta_brick", has(ModItems.TERRACOTTA_BRICK))
+            .define ('A', ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get())
+            .unlockedBy("has_terracotta_brick", has(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE)))
             .save(output, "terracotta_bricks_basic");
     }
 }

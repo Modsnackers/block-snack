@@ -50,7 +50,7 @@ public class BlockSnack {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.TERRACOTTA_BRICK);
+            event.accept(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE));
         }
         if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModItems.TERRACOTTA_BRICKS);

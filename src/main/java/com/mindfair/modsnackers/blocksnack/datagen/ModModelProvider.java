@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
 import com.mindfair.modsnackers.blocksnack.ModBlocks;
 import com.mindfair.modsnackers.blocksnack.ModItems;
+import com.mindfair.modsnackers.blocksnack.TerracottaColors;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -23,7 +24,7 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         /* Items */
-        registerBrickItemModels(itemModels, ModItems.TERRACOTTA_BRICK.get());
+        registerBrickItemModels(itemModels, ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get());
 
         /* Blocks */
         blockModels.createTrivialCube(ModBlocks.TERRACOTTA_BRICKS.get());
