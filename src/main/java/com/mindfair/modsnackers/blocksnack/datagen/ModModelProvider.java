@@ -24,14 +24,18 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         /* Items */
-        registerBrickItemModels(itemModels, ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get());
+        registerBrickItemModel(itemModels, ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get());
 
         /* Blocks */
-        blockModels.createTrivialCube(ModBlocks.TERRACOTTA_BRICKS.get());
+        registerBricksBlockModel(blockModels, ModBlocks.TERRACOTTA_BRICKS.get());
     }
 
-    private void registerBrickItemModels(ItemModelGenerators itemModels, Item brickItem) {
+    private void registerBrickItemModel(ItemModelGenerators itemModels, Item brickItem) {
         itemModels.generateFlatItem(brickItem, ModelTemplates.FLAT_ITEM);
+    }
+
+    private void registerBricksBlockModel(BlockModelGenerators blockModels, Block bricksBlock) {
+        blockModels.createTrivialCube(bricksBlock);
     }
 
     @Override
