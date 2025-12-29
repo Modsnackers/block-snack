@@ -23,10 +23,14 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         /* Items */
-        itemModels.generateFlatItem(ModItems.TERRACOTTA_BRICK.get(), ModelTemplates.FLAT_ITEM);
+        registerBrickItemModels(itemModels, ModItems.TERRACOTTA_BRICK.get());
 
         /* Blocks */
         blockModels.createTrivialCube(ModBlocks.TERRACOTTA_BRICKS.get());
+    }
+
+    private void registerBrickItemModels(ItemModelGenerators itemModels, Item brickItem) {
+        itemModels.generateFlatItem(brickItem, ModelTemplates.FLAT_ITEM);
     }
 
     @Override
