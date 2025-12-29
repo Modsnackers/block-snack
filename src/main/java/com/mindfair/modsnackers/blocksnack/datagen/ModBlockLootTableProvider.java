@@ -3,6 +3,7 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 import java.util.Set;
 
 import com.mindfair.modsnackers.blocksnack.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.TerracottaColors;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -26,6 +27,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.dropSelf(ModBlocks.TERRACOTTA_BRICKS.get());
+        this.dropSelf(ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE).get());
     }
 }

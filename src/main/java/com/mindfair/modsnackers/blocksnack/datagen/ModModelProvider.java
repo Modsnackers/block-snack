@@ -27,7 +27,7 @@ public class ModModelProvider extends ModelProvider {
         registerBrickItemModel(itemModels, ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get());
 
         /* Blocks */
-        registerBricksBlockModel(blockModels, ModBlocks.TERRACOTTA_BRICKS.get());
+        registerBricksBlockModel(blockModels, ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE).get());
     }
 
     private void registerBrickItemModel(ItemModelGenerators itemModels, Item brickItem) {

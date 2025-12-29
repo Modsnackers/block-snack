@@ -1,5 +1,7 @@
 package com.mindfair.modsnackers.blocksnack;
 
+import java.util.EnumMap;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
@@ -12,8 +14,16 @@ public class ModBlocks {
     // Create a Deferred Register to hold Blocks which will all be registered under the "blocksnack" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BlockSnack.MODID);
     
-    // Creates a new Block with the id "blocksnack:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> TERRACOTTA_BRICKS = registerTerracottaBricks(TerracottaColors.NONE);
+    // Registers all the Terracotta Bricks blocks and puts them in a list
+    public static final EnumMap<TerracottaColors, DeferredBlock<Block>> TERRACOTTA_BRICKS_LIST = registerTerracottaBrickBlocks();
+
+    private static EnumMap<TerracottaColors, DeferredBlock<Block>> registerTerracottaBrickBlocks () {
+        EnumMap<TerracottaColors, DeferredBlock<Block>> items = new EnumMap<TerracottaColors, DeferredBlock<Block>>(TerracottaColors.class);
+
+        items.put(TerracottaColors.NONE, registerTerracottaBricks(TerracottaColors.NONE));
+
+        return items;
+    }
 
     private static DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color) {
         String name = (color == TerracottaColors.NONE ? "terracotta_bricks" : String.format("%s_terracotta_bricks", color));

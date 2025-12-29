@@ -37,7 +37,7 @@ public class ModItems {
 
     public static final DeferredItem<BlockItem> TERRACOTTA_BRICKS = ITEMS.registerSimpleBlockItem(
         "terracotta_bricks",
-        ModBlocks.TERRACOTTA_BRICKS
+        ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE)
     );
 
     public static void register(IEventBus eventBus) {
