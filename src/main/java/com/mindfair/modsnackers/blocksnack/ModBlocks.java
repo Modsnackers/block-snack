@@ -1,5 +1,7 @@
 package com.mindfair.modsnackers.blocksnack;
 
+import java.util.EnumMap;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
@@ -12,14 +14,30 @@ public class ModBlocks {
     // Create a Deferred Register to hold Blocks which will all be registered under the "blocksnack" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BlockSnack.MODID);
     
-    // Creates a new Block with the id "blocksnack:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> TERRACOTTA_BRICKS = BLOCKS.register(
-        "terracotta_bricks",
-        registryName -> new Block(BlockBehaviour.Properties.of()
-            .setId(ResourceKey.create(Registries.BLOCK, registryName))
-            .requiresCorrectToolForDrops()
-            .destroyTime(1.85f)
-            .explosionResistance(5.0f)));    
+    // Registers all the Terracotta Bricks blocks and puts them in a list
+    public static final EnumMap<TerracottaColors, DeferredBlock<Block>> TERRACOTTA_BRICKS_LIST = registerTerracottaBrickBlocks();
+
+    private static EnumMap<TerracottaColors, DeferredBlock<Block>> registerTerracottaBrickBlocks () {
+        EnumMap<TerracottaColors, DeferredBlock<Block>> blocks = new EnumMap<TerracottaColors, DeferredBlock<Block>>(TerracottaColors.class);
+
+        for (TerracottaColors color: TerracottaColors.values()) {
+            blocks.put(color, registerTerracottaBricks(color));
+        }
+
+        return blocks;
+    }
+
+    private static DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color) {
+        return BLOCKS.register(
+            TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color),
+            registryName -> new Block(BlockBehaviour.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, registryName))
+                .requiresCorrectToolForDrops()
+                .destroyTime(1.85f)
+                .explosionResistance(5.0f)
+            )
+        );
+    }
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
