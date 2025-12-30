@@ -38,17 +38,41 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.MISC, ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE), 4)
-        .unlockedBy("has_terracotta_brick", this.has(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE)))
-        .save(this.output, "terracotta_brick_from_terracotta_stonecutting");;
-        
+        buildTerracottaBrickStonecutterRecipe(TerracottaColors.NONE);
+        buildTerracottaBricksRecipe(TerracottaColors.NONE);
+    }
+
+    private String getUnlockRuleName(TerracottaColors color){
+        return color == TerracottaColors.NONE ? "has_terracotta_brick" : String.format("has_%s_terracotta_brick", color.name().toLowerCase());
+    }
+    private void buildTerracottaBrickStonecutterRecipe(TerracottaColors color) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.MISC, ModItems.TERRACOTTA_BRICK_LIST.get(color), 4)
+        .unlockedBy(
+            getUnlockRuleName(color),
+            this.has(ModItems.TERRACOTTA_BRICK_LIST.get(color))
+        )
+        .save(
+            this.output,
+            String.format(
+                "%s_from_%s",
+                TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
+                TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
+            )
+        );
+    }
+
+    private void buildTerracottaBricksRecipe(TerracottaColors color) {
         shaped(
             RecipeCategory.BUILDING_BLOCKS,
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE).get())
+            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).get())
             .pattern ("AA")
             .pattern ("AA")
-            .define ('A', ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get())
-            .unlockedBy("has_terracotta_brick", has(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE)))
-            .save(output, "terracotta_bricks_basic");
+            .define ('A', ModItems.TERRACOTTA_BRICK_LIST.get(color).get())
+            .unlockedBy(
+                getUnlockRuleName(color),
+                has(ModItems.TERRACOTTA_BRICK_LIST.get(color))
+            )
+            .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color)
+        );
     }
 }
