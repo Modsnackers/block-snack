@@ -5,7 +5,6 @@ import java.util.concurrent.CompletableFuture;
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
 import com.mindfair.modsnackers.blocksnack.ModItems;
 import com.mindfair.modsnackers.blocksnack.ModTags;
-import com.mindfair.modsnackers.blocksnack.TerracottaColors;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -20,7 +19,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        addTagsForTerracottaBrick(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE).get());
+        ModItems.TERRACOTTA_BRICK_LIST.forEach((color, item) -> addTagsForTerracottaBrick(item.get()));
     }
 
     private void addTagsForTerracottaBrick(Item terracottaBrickItem) {
