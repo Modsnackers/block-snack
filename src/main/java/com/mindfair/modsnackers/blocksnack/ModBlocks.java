@@ -18,18 +18,18 @@ public class ModBlocks {
     public static final EnumMap<TerracottaColors, DeferredBlock<Block>> TERRACOTTA_BRICKS_LIST = registerTerracottaBrickBlocks();
 
     private static EnumMap<TerracottaColors, DeferredBlock<Block>> registerTerracottaBrickBlocks () {
-        EnumMap<TerracottaColors, DeferredBlock<Block>> items = new EnumMap<TerracottaColors, DeferredBlock<Block>>(TerracottaColors.class);
+        EnumMap<TerracottaColors, DeferredBlock<Block>> blocks = new EnumMap<TerracottaColors, DeferredBlock<Block>>(TerracottaColors.class);
 
-        items.put(TerracottaColors.NONE, registerTerracottaBricks(TerracottaColors.NONE));
-        items.put(TerracottaColors.BLACK, registerTerracottaBricks(TerracottaColors.BLACK));
+        for (TerracottaColors color: TerracottaColors.values()) {
+            blocks.put(color, registerTerracottaBricks(color));
+        }
 
-        return items;
+        return blocks;
     }
 
     private static DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color) {
-        String name = (color == TerracottaColors.NONE ? "terracotta_bricks" : String.format("%s_terracotta_bricks", color.name().toLowerCase()));
         return BLOCKS.register(
-            name,
+            TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color),
             registryName -> new Block(BlockBehaviour.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, registryName))
                 .requiresCorrectToolForDrops()

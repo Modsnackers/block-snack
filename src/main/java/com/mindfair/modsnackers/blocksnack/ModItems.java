@@ -20,12 +20,14 @@ public class ModItems {
     private static EnumMap<TerracottaColors, DeferredItem<Item>> registerTerracottaBrickItems () {
         EnumMap<TerracottaColors, DeferredItem<Item>> items = new EnumMap<TerracottaColors, DeferredItem<Item>>(TerracottaColors.class);
 
-        items.put(TerracottaColors.NONE, registerTerracottaBrick(TerracottaColors.NONE));
+        for (TerracottaColors color: TerracottaColors.values()) {
+            items.put(color, registerTerracottaBrick(color));
+        }
 
         return items;
     }
     private static DeferredItem<Item> registerTerracottaBrick(TerracottaColors color) {
-        String name = (color == TerracottaColors.NONE ? "terracotta_brick" : String.format("%s_terracotta_brick", color));
+        String name = TerracottaColors.getNameWithColorPrefix("terracotta_brick", color);
         return ITEMS.register(
             name,
             () -> new Item(new Item.Properties()
@@ -38,13 +40,17 @@ public class ModItems {
     private static EnumMap<TerracottaColors, DeferredItem<BlockItem>> registerTerracottaBricksItems () {
         EnumMap<TerracottaColors, DeferredItem<BlockItem>> blockItems = new EnumMap<TerracottaColors, DeferredItem<BlockItem>>(TerracottaColors.class);
 
-        blockItems.put(TerracottaColors.NONE, registerTerracottaBricks(TerracottaColors.NONE));
-        blockItems.put(TerracottaColors.BLACK, registerTerracottaBricks(TerracottaColors.BLACK));
+        for (TerracottaColors color: TerracottaColors.values()) {
+            blockItems.put(color, registerTerracottaBricks(color));
+        }
+
         return blockItems;
     }
     private static DeferredItem<BlockItem> registerTerracottaBricks(TerracottaColors color) {
-        String name = TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color);
-        return ITEMS.registerSimpleBlockItem(name, ModBlocks.TERRACOTTA_BRICKS_LIST.get(color));
+        return ITEMS.registerSimpleBlockItem(
+            TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color),
+            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color)
+        );
     }
 
     public static void register(IEventBus eventBus) {
