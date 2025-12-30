@@ -15,6 +15,7 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(BlockSnack.MODID);
 
     public static final EnumMap<TerracottaColors, DeferredItem<Item>> TERRACOTTA_BRICK_LIST = registerTerracottaBrickItems();
+    public static final EnumMap<TerracottaColors, DeferredItem<BlockItem>> TERRACOTTA_BRICKS_LIST = registerTerracottaBricksItems();
 
     private static EnumMap<TerracottaColors, DeferredItem<Item>> registerTerracottaBrickItems () {
         EnumMap<TerracottaColors, DeferredItem<Item>> items = new EnumMap<TerracottaColors, DeferredItem<Item>>(TerracottaColors.class);
@@ -23,7 +24,6 @@ public class ModItems {
 
         return items;
     }
-
     private static DeferredItem<Item> registerTerracottaBrick(TerracottaColors color) {
         String name = (color == TerracottaColors.NONE ? "terracotta_brick" : String.format("%s_terracotta_brick", color));
         return ITEMS.register(
@@ -35,10 +35,17 @@ public class ModItems {
         );
     }
 
-    public static final DeferredItem<BlockItem> TERRACOTTA_BRICKS = ITEMS.registerSimpleBlockItem(
-        "terracotta_bricks",
-        ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE)
-    );
+    private static EnumMap<TerracottaColors, DeferredItem<BlockItem>> registerTerracottaBricksItems () {
+        EnumMap<TerracottaColors, DeferredItem<BlockItem>> blockItems = new EnumMap<TerracottaColors, DeferredItem<BlockItem>>(TerracottaColors.class);
+
+        blockItems.put(TerracottaColors.NONE, registerTerracottaBricks(TerracottaColors.NONE));
+        blockItems.put(TerracottaColors.BLACK, registerTerracottaBricks(TerracottaColors.BLACK));
+        return blockItems;
+    }
+    private static DeferredItem<BlockItem> registerTerracottaBricks(TerracottaColors color) {
+        String name = TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color);
+        return ITEMS.registerSimpleBlockItem(name, ModBlocks.TERRACOTTA_BRICKS_LIST.get(color));
+    }
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

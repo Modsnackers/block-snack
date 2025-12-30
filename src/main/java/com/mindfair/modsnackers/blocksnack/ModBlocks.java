@@ -21,12 +21,13 @@ public class ModBlocks {
         EnumMap<TerracottaColors, DeferredBlock<Block>> items = new EnumMap<TerracottaColors, DeferredBlock<Block>>(TerracottaColors.class);
 
         items.put(TerracottaColors.NONE, registerTerracottaBricks(TerracottaColors.NONE));
+        items.put(TerracottaColors.BLACK, registerTerracottaBricks(TerracottaColors.BLACK));
 
         return items;
     }
 
     private static DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color) {
-        String name = (color == TerracottaColors.NONE ? "terracotta_bricks" : String.format("%s_terracotta_bricks", color));
+        String name = (color == TerracottaColors.NONE ? "terracotta_bricks" : String.format("%s_terracotta_bricks", color.name().toLowerCase()));
         return BLOCKS.register(
             name,
             registryName -> new Block(BlockBehaviour.Properties.of()

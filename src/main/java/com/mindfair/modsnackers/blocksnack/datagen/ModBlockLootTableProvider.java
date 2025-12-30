@@ -28,5 +28,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE).get());
+        this.dropSelf(ModBlocks.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.BLACK).get());
     }
 }

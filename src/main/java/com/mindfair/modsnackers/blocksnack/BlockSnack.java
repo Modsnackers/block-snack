@@ -51,9 +51,11 @@ public class BlockSnack {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.NONE));
+            event.accept(ModItems.TERRACOTTA_BRICK_LIST.get(TerracottaColors.BLACK));
         }
         if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModItems.TERRACOTTA_BRICKS);
+            event.accept(ModItems.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.NONE));
+            event.accept(ModItems.TERRACOTTA_BRICKS_LIST.get(TerracottaColors.BLACK));
         }
     }
 
