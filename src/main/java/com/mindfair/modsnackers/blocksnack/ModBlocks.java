@@ -1,13 +1,9 @@
 package com.mindfair.modsnackers.blocksnack;
+import com.mindfair.modsnackers.blocksnack.blocks.StandardTerracottaBlockGroup;
 
 import java.util.EnumMap;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModBlocks {
@@ -15,28 +11,16 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BlockSnack.MODID);
     
     // Registers all the Terracotta Bricks blocks and puts them in a list
-    public static final EnumMap<TerracottaColors, DeferredBlock<Block>> TERRACOTTA_BRICKS_LIST = registerTerracottaBrickBlocks();
+    public static final EnumMap<TerracottaColors, StandardTerracottaBlockGroup> TERRACOTTA_BRICKS_LIST = registerTerracottaBrickBlocks();
 
-    private static EnumMap<TerracottaColors, DeferredBlock<Block>> registerTerracottaBrickBlocks () {
-        EnumMap<TerracottaColors, DeferredBlock<Block>> blocks = new EnumMap<TerracottaColors, DeferredBlock<Block>>(TerracottaColors.class);
+    private static EnumMap<TerracottaColors, StandardTerracottaBlockGroup> registerTerracottaBrickBlocks () {
+        EnumMap<TerracottaColors, StandardTerracottaBlockGroup> blocks = new EnumMap<TerracottaColors, StandardTerracottaBlockGroup>(TerracottaColors.class);
 
         for (TerracottaColors color: TerracottaColors.values()) {
-            blocks.put(color, registerTerracottaBricks(color));
+            blocks.put(color, new StandardTerracottaBlockGroup(color, BLOCKS));
         }
 
         return blocks;
-    }
-
-    private static DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color) {
-        return BLOCKS.register(
-            TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color),
-            registryName -> new Block(BlockBehaviour.Properties.of()
-                .setId(ResourceKey.create(Registries.BLOCK, registryName))
-                .requiresCorrectToolForDrops()
-                .destroyTime(1.85f)
-                .explosionResistance(5.0f)
-            )
-        );
     }
 
     public static void register(IEventBus eventBus) {

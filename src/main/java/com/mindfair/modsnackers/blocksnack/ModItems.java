@@ -49,7 +49,7 @@ public class ModItems {
     private static DeferredItem<BlockItem> registerTerracottaBricks(TerracottaColors color) {
         return ITEMS.registerSimpleBlockItem(
             TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color),
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color)
+            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).BricksBlock
         );
     }
 

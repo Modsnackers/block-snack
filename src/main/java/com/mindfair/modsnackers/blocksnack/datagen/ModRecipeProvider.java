@@ -86,7 +86,7 @@ public class ModRecipeProvider extends RecipeProvider {
     private void buildTerracottaBricksRecipe(TerracottaColors color) {
         shaped(
             RecipeCategory.BUILDING_BLOCKS,
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).get())
+            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).BricksBlock.get())
             .pattern ("AA")
             .pattern ("AA")
             .define ('A', ModItems.TERRACOTTA_BRICK_LIST.get(color).get())

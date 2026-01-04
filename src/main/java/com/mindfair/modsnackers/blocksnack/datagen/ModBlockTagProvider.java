@@ -18,7 +18,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, block) -> addTagsForTerracottaBricks(block.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> addTagsForTerracottaBricks(standardBlocks.BricksBlock.get()));
     }
 
     private void addTagsForTerracottaBricks(Block terracottaBricksBlock) {
