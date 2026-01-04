@@ -38,7 +38,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        ModItems.TERRACOTTA_BRICK_LIST.forEach((color, item) -> buildTerracottaBrickStonecutterRecipe(color));
+        ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, item) -> buildTerracottaBrickStonecutterRecipe(color));
         ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, block) -> buildTerracottaBricksRecipe(color));
     }
 
@@ -68,10 +68,10 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void buildTerracottaBrickStonecutterRecipe(TerracottaColors color) {
-        SingleItemRecipeBuilder.stonecutting(getTerracottaIngredient(color), RecipeCategory.MISC, ModItems.TERRACOTTA_BRICK_LIST.get(color), 4)
+        SingleItemRecipeBuilder.stonecutting(getTerracottaIngredient(color), RecipeCategory.MISC, ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem, 4)
         .unlockedBy(
             getUnlockRuleName(color),
-            this.has(ModItems.TERRACOTTA_BRICK_LIST.get(color))
+            this.has(ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem)
         )
         .save(
             this.output,
@@ -89,10 +89,10 @@ public class ModRecipeProvider extends RecipeProvider {
             ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).BricksBlock.get())
             .pattern ("AA")
             .pattern ("AA")
-            .define ('A', ModItems.TERRACOTTA_BRICK_LIST.get(color).get())
+            .define ('A', ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem.get())
             .unlockedBy(
                 getUnlockRuleName(color),
-                has(ModItems.TERRACOTTA_BRICK_LIST.get(color))
+                has(ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem)
             )
             .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color)
         );

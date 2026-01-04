@@ -19,7 +19,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        ModItems.TERRACOTTA_BRICK_LIST.forEach((color, item) -> addTagsForTerracottaBrick(item.get()));
+        ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> addTagsForTerracottaBrick(itemGroup.BrickItem.get()));
     }
 
     private void addTagsForTerracottaBrick(Item terracottaBrickItem) {

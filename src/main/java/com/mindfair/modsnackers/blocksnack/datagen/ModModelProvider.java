@@ -23,7 +23,7 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         /* Items */
-        ModItems.TERRACOTTA_BRICK_LIST.forEach((color, item) -> registerBrickItemModel(itemModels, item.get()));
+        ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> registerBrickItemModel(itemModels, itemGroup.BrickItem.get()));
 
         /* Blocks */
         ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> registerBricksBlockModel(blockModels, standardBlocks.BricksBlock.get()));
