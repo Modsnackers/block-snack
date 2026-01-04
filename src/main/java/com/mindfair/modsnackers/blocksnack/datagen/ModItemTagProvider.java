@@ -3,8 +3,8 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
-import com.mindfair.modsnackers.blocksnack.ModItems;
 import com.mindfair.modsnackers.blocksnack.ModTags;
+import com.mindfair.modsnackers.blocksnack.items.ModItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

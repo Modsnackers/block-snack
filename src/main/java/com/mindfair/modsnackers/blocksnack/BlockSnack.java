@@ -2,6 +2,8 @@ package com.mindfair.modsnackers.blocksnack;
 
 import org.slf4j.Logger;
 
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.items.ModItems;
 import com.mojang.logging.LogUtils;
 
 import net.neoforged.bus.api.IEventBus;

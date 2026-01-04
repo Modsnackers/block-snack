@@ -1,8 +1,9 @@
-package com.mindfair.modsnackers.blocksnack;
+package com.mindfair.modsnackers.blocksnack.items;
 
 import java.util.EnumMap;
 
-import com.mindfair.modsnackers.blocksnack.items.StandardTerracottaItemGroup;
+import com.mindfair.modsnackers.blocksnack.BlockSnack;
+import com.mindfair.modsnackers.blocksnack.TerracottaColors;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;

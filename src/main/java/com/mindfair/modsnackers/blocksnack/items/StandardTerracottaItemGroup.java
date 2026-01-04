@@ -1,8 +1,8 @@
 package com.mindfair.modsnackers.blocksnack.items;
 
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
-import com.mindfair.modsnackers.blocksnack.ModBlocks;
 import com.mindfair.modsnackers.blocksnack.TerracottaColors;
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

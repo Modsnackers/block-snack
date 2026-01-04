@@ -3,8 +3,8 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 import java.util.stream.Stream;
 
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
-import com.mindfair.modsnackers.blocksnack.ModBlocks;
-import com.mindfair.modsnackers.blocksnack.ModItems;
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.items.ModItems;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;

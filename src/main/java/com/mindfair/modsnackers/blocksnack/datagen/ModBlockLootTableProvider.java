@@ -2,7 +2,7 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 
 import java.util.Set;
 
-import com.mindfair.modsnackers.blocksnack.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
