@@ -14,8 +14,10 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ModRecipeProvider extends RecipeProvider {
     public ModRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
@@ -44,8 +46,8 @@ public class ModRecipeProvider extends RecipeProvider {
         ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, block) -> buildTerracottaBricksRecipe(color));
     }
 
-    private String getUnlockRuleName(TerracottaColors color){
-        return color == TerracottaColors.NONE ? "has_terracotta_brick" : String.format("has_%s_terracotta_brick", color.name().toLowerCase());
+    private String getUnlockRuleName(DeferredItem<?> requiredItem){
+        return String.format("has_%s", requiredItem.getId().getPath());
     }
     private Ingredient getTerracottaIngredient(TerracottaColors color) {
         switch (color) {
@@ -70,19 +72,20 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void buildTerracottaBrickStonecutterRecipe(TerracottaColors color) {
+        DeferredItem<Item> brickItem = ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem;
         SingleItemRecipeBuilder.stonecutting(getTerracottaIngredient(color), RecipeCategory.MISC, ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem, 4)
-        .unlockedBy(
-            getUnlockRuleName(color),
-            this.has(ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem)
-        )
-        .save(
-            this.output,
-            String.format(
-                "%s_from_%s",
-                TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
-                TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
+            .unlockedBy(
+                getUnlockRuleName(brickItem),
+                this.has(brickItem)
             )
-        );
+            .save(
+                this.output,
+                String.format(
+                    "%s_from_%s",
+                    TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
+                    TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
+                )
+            );
     }
 
     private void buildTerracottaBricksRecipe(TerracottaColors color) {
@@ -95,16 +98,16 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern ("AA")
             .define ('A', ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem.get())
             .unlockedBy(
-                getUnlockRuleName(color),
+                getUnlockRuleName(terracottaItemGroup.BrickItem),
                 has(terracottaItemGroup.BrickItem)
             )
             .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color)
         );
         stairBuilder(terracottaBlockGroup.BrickStairBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
-            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color))
+            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color))
             .unlockedBy(
-                getUnlockRuleName(color),
-                has(terracottaItemGroup.BrickItem)
+                getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
+                has(terracottaItemGroup.BricksBlockItem)
             )
             .save(output);
     }
