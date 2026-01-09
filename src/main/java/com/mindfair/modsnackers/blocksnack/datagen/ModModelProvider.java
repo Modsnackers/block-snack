@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
 import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.blocks.StandardTerracottaBlockGroup;
 import com.mindfair.modsnackers.blocksnack.items.ModItems;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -26,15 +27,16 @@ public class ModModelProvider extends ModelProvider {
         ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> registerBrickItemModel(itemModels, itemGroup.BrickItem.get()));
 
         /* Blocks */
-        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> registerBricksBlockModel(blockModels, standardBlocks.BricksBlock.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> registerTerracottaBricksBlockModel(blockModels, standardBlocks));
     }
 
     private void registerBrickItemModel(ItemModelGenerators itemModels, Item brickItem) {
         itemModels.generateFlatItem(brickItem, ModelTemplates.FLAT_ITEM);
     }
 
-    private void registerBricksBlockModel(BlockModelGenerators blockModels, Block bricksBlock) {
-        blockModels.createTrivialCube(bricksBlock);
+    private void registerTerracottaBricksBlockModel(BlockModelGenerators blockModels, StandardTerracottaBlockGroup terracottaBlockGroup) {
+        blockModels.family(terracottaBlockGroup.BricksBlock.get())
+            .stairs(terracottaBlockGroup.BrickStairBlock.get());
     }
 
     @Override

@@ -27,5 +27,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> this.dropSelf(standardBlocks.BricksBlock.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> this.dropSelf(standardBlocks.BrickStairBlock.get()));
     }
 }

@@ -4,7 +4,9 @@ import java.util.concurrent.CompletableFuture;
 
 import com.mindfair.modsnackers.blocksnack.TerracottaColors;
 import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.blocks.StandardTerracottaBlockGroup;
 import com.mindfair.modsnackers.blocksnack.items.ModItems;
+import com.mindfair.modsnackers.blocksnack.items.StandardTerracottaItemGroup;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -84,6 +86,8 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     private void buildTerracottaBricksRecipe(TerracottaColors color) {
+        StandardTerracottaItemGroup terracottaItemGroup = ModItems.TERRACOTTA_ITEMS_LIST.get(color);
+        StandardTerracottaBlockGroup terracottaBlockGroup = ModBlocks.TERRACOTTA_BRICKS_LIST.get(color);
         shaped(
             RecipeCategory.BUILDING_BLOCKS,
             ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).BricksBlock.get())
@@ -92,9 +96,16 @@ public class ModRecipeProvider extends RecipeProvider {
             .define ('A', ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem.get())
             .unlockedBy(
                 getUnlockRuleName(color),
-                has(ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem)
+                has(terracottaItemGroup.BrickItem)
             )
             .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color)
         );
+        stairBuilder(terracottaBlockGroup.BrickStairBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
+            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color))
+            .unlockedBy(
+                getUnlockRuleName(color),
+                has(terracottaItemGroup.BrickItem)
+            )
+            .save(output);
     }
 }
