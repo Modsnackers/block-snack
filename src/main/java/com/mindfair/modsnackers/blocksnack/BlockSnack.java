@@ -57,6 +57,7 @@ public class BlockSnack {
         if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.BUILDING_BLOCKS) {
             ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BricksBlockItem.get()));
             ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickStairBlockItem.get()));
+            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickSlabBlockItem.get()));
         }
     }
 
