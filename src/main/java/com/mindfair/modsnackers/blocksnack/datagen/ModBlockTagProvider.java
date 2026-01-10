@@ -27,5 +27,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
             .add(terracottaBlockGroup.BrickStairBlock.get())
             .add(terracottaBlockGroup.BrickSlabBlock.get())
             .add(terracottaBlockGroup.BrickWallBlock.get());
+        tag(BlockTags.WALLS).add(terracottaBlockGroup.BrickWallBlock.get());
     }
 }
