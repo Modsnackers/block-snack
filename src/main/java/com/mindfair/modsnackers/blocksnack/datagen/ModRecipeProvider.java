@@ -2,9 +2,11 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.mindfair.modsnackers.blocksnack.ModBlocks;
-import com.mindfair.modsnackers.blocksnack.ModItems;
 import com.mindfair.modsnackers.blocksnack.TerracottaColors;
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.blocks.StandardTerracottaBlockGroup;
+import com.mindfair.modsnackers.blocksnack.items.ModItems;
+import com.mindfair.modsnackers.blocksnack.items.StandardTerracottaItemGroup;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -12,8 +14,10 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ModRecipeProvider extends RecipeProvider {
     public ModRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
@@ -38,12 +42,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        ModItems.TERRACOTTA_BRICK_LIST.forEach((color, item) -> buildTerracottaBrickStonecutterRecipe(color));
+        ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, item) -> buildTerracottaBrickStonecutterRecipe(color));
         ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, block) -> buildTerracottaBricksRecipe(color));
     }
 
-    private String getUnlockRuleName(TerracottaColors color){
-        return color == TerracottaColors.NONE ? "has_terracotta_brick" : String.format("has_%s_terracotta_brick", color.name().toLowerCase());
+    private String getUnlockRuleName(DeferredItem<?> requiredItem){
+        return String.format("has_%s", requiredItem.getId().getPath());
     }
     private Ingredient getTerracottaIngredient(TerracottaColors color) {
         switch (color) {
@@ -68,33 +72,60 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void buildTerracottaBrickStonecutterRecipe(TerracottaColors color) {
-        SingleItemRecipeBuilder.stonecutting(getTerracottaIngredient(color), RecipeCategory.MISC, ModItems.TERRACOTTA_BRICK_LIST.get(color), 4)
-        .unlockedBy(
-            getUnlockRuleName(color),
-            this.has(ModItems.TERRACOTTA_BRICK_LIST.get(color))
-        )
-        .save(
-            this.output,
-            String.format(
-                "%s_from_%s",
-                TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
-                TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
+        DeferredItem<Item> brickItem = ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem;
+        SingleItemRecipeBuilder.stonecutting(getTerracottaIngredient(color), RecipeCategory.MISC, ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem, 4)
+            .unlockedBy(
+                getUnlockRuleName(brickItem),
+                this.has(brickItem)
             )
-        );
+            .save(
+                this.output,
+                String.format(
+                    "%s_from_%s",
+                    TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
+                    TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
+                )
+            );
     }
 
     private void buildTerracottaBricksRecipe(TerracottaColors color) {
+        StandardTerracottaItemGroup terracottaItemGroup = ModItems.TERRACOTTA_ITEMS_LIST.get(color);
+        StandardTerracottaBlockGroup terracottaBlockGroup = ModBlocks.TERRACOTTA_BRICKS_LIST.get(color);
         shaped(
             RecipeCategory.BUILDING_BLOCKS,
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).get())
+            ModBlocks.TERRACOTTA_BRICKS_LIST.get(color).BricksBlock.get())
             .pattern ("AA")
             .pattern ("AA")
-            .define ('A', ModItems.TERRACOTTA_BRICK_LIST.get(color).get())
+            .define ('A', ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem.get())
             .unlockedBy(
-                getUnlockRuleName(color),
-                has(ModItems.TERRACOTTA_BRICK_LIST.get(color))
+                getUnlockRuleName(terracottaItemGroup.BrickItem),
+                has(terracottaItemGroup.BrickItem)
             )
             .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_bricks_basic", color)
+        );
+        stairBuilder(terracottaBlockGroup.BrickStairBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
+            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color))
+            .unlockedBy(
+                getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
+                has(terracottaItemGroup.BricksBlockItem)
+            )
+            .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_brick_stair", color)
+        );
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, terracottaBlockGroup.BrickSlabBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
+            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color))
+            .unlockedBy(
+                getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
+                has(terracottaItemGroup.BricksBlockItem)
+            )
+            .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_brick_slab", color)
+        );
+        wallBuilder(RecipeCategory.BUILDING_BLOCKS, terracottaBlockGroup.BrickWallBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
+            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color))
+            .unlockedBy(
+                getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
+                has(terracottaItemGroup.BricksBlockItem)
+            )
+            .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_brick_wall", color)
         );
     }
 }

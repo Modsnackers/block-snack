@@ -3,8 +3,9 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 import java.util.stream.Stream;
 
 import com.mindfair.modsnackers.blocksnack.BlockSnack;
-import com.mindfair.modsnackers.blocksnack.ModBlocks;
-import com.mindfair.modsnackers.blocksnack.ModItems;
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.blocks.StandardTerracottaBlockGroup;
+import com.mindfair.modsnackers.blocksnack.items.ModItems;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -23,18 +24,20 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         /* Items */
-        ModItems.TERRACOTTA_BRICK_LIST.forEach((color, item) -> registerBrickItemModel(itemModels, item.get()));
+        ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> registerBrickItemModel(itemModels, itemGroup.BrickItem.get()));
 
         /* Blocks */
-        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, block) -> registerBricksBlockModel(blockModels, block.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> registerTerracottaBricksBlockModel(blockModels, standardBlocks));
     }
 
     private void registerBrickItemModel(ItemModelGenerators itemModels, Item brickItem) {
         itemModels.generateFlatItem(brickItem, ModelTemplates.FLAT_ITEM);
     }
-
-    private void registerBricksBlockModel(BlockModelGenerators blockModels, Block bricksBlock) {
-        blockModels.createTrivialCube(bricksBlock);
+    private void registerTerracottaBricksBlockModel(BlockModelGenerators blockModels, StandardTerracottaBlockGroup terracottaBlockGroup) {
+        blockModels.family(terracottaBlockGroup.BricksBlock.get())
+            .stairs(terracottaBlockGroup.BrickStairBlock.get())
+            .slab(terracottaBlockGroup.BrickSlabBlock.get())
+            .wall(terracottaBlockGroup.BrickWallBlock.get());
     }
 
     @Override

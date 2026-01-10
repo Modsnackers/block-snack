@@ -2,7 +2,7 @@ package com.mindfair.modsnackers.blocksnack.datagen;
 
 import java.util.Set;
 
-import com.mindfair.modsnackers.blocksnack.ModBlocks;
+import com.mindfair.modsnackers.blocksnack.blocks.ModBlocks;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -26,6 +26,9 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, block) -> this.dropSelf(block.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> this.dropSelf(standardBlocks.BricksBlock.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> this.dropSelf(standardBlocks.BrickStairBlock.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> this.dropSelf(standardBlocks.BrickSlabBlock.get()));
+        ModBlocks.TERRACOTTA_BRICKS_LIST.forEach((color, standardBlocks) -> this.dropSelf(standardBlocks.BrickWallBlock.get()));
     }
 }
