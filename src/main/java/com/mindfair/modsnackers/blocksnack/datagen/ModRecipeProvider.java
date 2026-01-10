@@ -109,13 +109,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
                 has(terracottaItemGroup.BricksBlockItem)
             )
-            .save(output);
+            .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_brick_stair", color)
+        );
         slabBuilder(RecipeCategory.BUILDING_BLOCKS, terracottaBlockGroup.BrickSlabBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
             .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color))
             .unlockedBy(
                 getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
                 has(terracottaItemGroup.BricksBlockItem)
             )
-            .save(output);
+            .save(output, TerracottaColors.getNameWithColorPrefix("terracotta_brick_slab", color)
+        );
     }
 }
