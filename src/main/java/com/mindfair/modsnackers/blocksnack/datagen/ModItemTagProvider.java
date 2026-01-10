@@ -32,5 +32,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
             .add(terracottaItemGroup.BrickStairBlockItem.get());
         tag(ItemTags.SLABS)
             .add(terracottaItemGroup.BrickSlabBlockItem.get());
+        tag(ItemTags.WALLS)
+            .add(terracottaItemGroup.BrickWallBlockItem.get());
     }
 }

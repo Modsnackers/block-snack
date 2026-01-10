@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,12 +17,14 @@ public class StandardTerracottaBlockGroup {
             BricksBlock = registerTerracottaBricks(color, blockRegister);
             BrickStairBlock = registerTerracottaBrickStair(color, blockRegister);
             BrickSlabBlock = registerTerracottaBrickSlab(color, blockRegister);
+            BrickWallBlock = registerTerracottaBrickWall(color, blockRegister);
         }
         private static final float DESTROY_TIME = 1.85f;
         private static final float EXPLOSION_RESISTANCE = 5.00f;
         public DeferredBlock<Block> BricksBlock;
         public DeferredBlock<StairBlock> BrickStairBlock;
         public DeferredBlock<SlabBlock> BrickSlabBlock;
+        public DeferredBlock<WallBlock> BrickWallBlock;
 
         private DeferredBlock<Block> registerTerracottaBricks(TerracottaColors color, DeferredRegister.Blocks blockRegister) {
             return blockRegister.register(
@@ -29,8 +32,8 @@ public class StandardTerracottaBlockGroup {
                 registryName -> new Block(BlockBehaviour.Properties.of()
                     .setId(ResourceKey.create(Registries.BLOCK, registryName))
                     .requiresCorrectToolForDrops()
-                    .destroyTime(1.85f)
-                    .explosionResistance(5.0f)
+                    .destroyTime(DESTROY_TIME)
+                    .explosionResistance(EXPLOSION_RESISTANCE)
                 )
             );
         }
@@ -49,6 +52,17 @@ public class StandardTerracottaBlockGroup {
             return blockRegister.registerBlock(
                 TerracottaColors.getNameWithColorPrefix("terracotta_brick_slab", color),
                 (properties) -> new SlabBlock(
+                    properties
+                    .requiresCorrectToolForDrops()
+                    .destroyTime(DESTROY_TIME)
+                    .explosionResistance(EXPLOSION_RESISTANCE)
+                )
+            );
+        }
+        private DeferredBlock<WallBlock> registerTerracottaBrickWall(TerracottaColors color, DeferredRegister.Blocks blockRegister) {
+            return blockRegister.registerBlock(
+                TerracottaColors.getNameWithColorPrefix("terracotta_brick_wall", color),
+                (properties) -> new WallBlock(
                     properties
                     .requiresCorrectToolForDrops()
                     .destroyTime(DESTROY_TIME)

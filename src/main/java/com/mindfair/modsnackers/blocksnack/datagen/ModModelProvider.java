@@ -36,7 +36,8 @@ public class ModModelProvider extends ModelProvider {
     private void registerTerracottaBricksBlockModel(BlockModelGenerators blockModels, StandardTerracottaBlockGroup terracottaBlockGroup) {
         blockModels.family(terracottaBlockGroup.BricksBlock.get())
             .stairs(terracottaBlockGroup.BrickStairBlock.get())
-            .slab(terracottaBlockGroup.BrickSlabBlock.get());
+            .slab(terracottaBlockGroup.BrickSlabBlock.get())
+            .wall(terracottaBlockGroup.BrickWallBlock.get());
     }
 
     @Override

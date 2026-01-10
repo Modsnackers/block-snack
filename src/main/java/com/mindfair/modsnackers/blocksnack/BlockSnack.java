@@ -58,6 +58,7 @@ public class BlockSnack {
             ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BricksBlockItem.get()));
             ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickStairBlockItem.get()));
             ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickSlabBlockItem.get()));
+            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickWallBlockItem.get()));
         }
     }
 

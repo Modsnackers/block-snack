@@ -20,6 +20,7 @@ public class StandardTerracottaItemGroup {
         BricksBlockItem = registerTerracottaBricks();
         BrickStairBlockItem = registerTerracottaBrickStair();
         BrickSlabBlockItem = registerTerracottaBrickSlab();
+        BrickWallBlockItem = registerTerracottaBrickWall();
     }
     public TerracottaColors Color;
     private DeferredRegister.Items ItemRegister;
@@ -27,6 +28,7 @@ public class StandardTerracottaItemGroup {
     public DeferredItem<BlockItem> BricksBlockItem;
     public DeferredItem<BlockItem> BrickStairBlockItem;
     public DeferredItem<BlockItem> BrickSlabBlockItem;
+    public DeferredItem<BlockItem> BrickWallBlockItem;
 
     private DeferredItem<Item> registerTerracottaBrick() {
         String name = TerracottaColors.getNameWithColorPrefix("terracotta_brick", Color);
@@ -54,6 +56,12 @@ public class StandardTerracottaItemGroup {
         return ItemRegister.registerSimpleBlockItem(
             TerracottaColors.getNameWithColorPrefix("terracotta_brick_slab", Color),
             ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickSlabBlock
+        );
+    }
+    private DeferredItem<BlockItem> registerTerracottaBrickWall() {
+        return ItemRegister.registerSimpleBlockItem(
+            TerracottaColors.getNameWithColorPrefix("terracotta_brick_wall", Color),
+            ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickWallBlock
         );
     }
 }
