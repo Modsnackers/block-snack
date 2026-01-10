@@ -33,10 +33,10 @@ public class ModModelProvider extends ModelProvider {
     private void registerBrickItemModel(ItemModelGenerators itemModels, Item brickItem) {
         itemModels.generateFlatItem(brickItem, ModelTemplates.FLAT_ITEM);
     }
-
     private void registerTerracottaBricksBlockModel(BlockModelGenerators blockModels, StandardTerracottaBlockGroup terracottaBlockGroup) {
         blockModels.family(terracottaBlockGroup.BricksBlock.get())
-            .stairs(terracottaBlockGroup.BrickStairBlock.get());
+            .stairs(terracottaBlockGroup.BrickStairBlock.get())
+            .slab(terracottaBlockGroup.BrickSlabBlock.get());
     }
 
     @Override

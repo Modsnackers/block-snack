@@ -110,5 +110,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 has(terracottaItemGroup.BricksBlockItem)
             )
             .save(output);
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, terracottaBlockGroup.BrickSlabBlock.get(), Ingredient.of(terracottaItemGroup.BricksBlockItem))
+            .group(TerracottaColors.getNameWithColorPrefix("terracotta_bricks", color))
+            .unlockedBy(
+                getUnlockRuleName(terracottaItemGroup.BricksBlockItem),
+                has(terracottaItemGroup.BricksBlockItem)
+            )
+            .save(output);
     }
 }

@@ -24,6 +24,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     private void addTagsForTerracottaBricks(StandardTerracottaBlockGroup terracottaBlockGroup) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(terracottaBlockGroup.BricksBlock.get())
-            .add(terracottaBlockGroup.BrickStairBlock.get());
+            .add(terracottaBlockGroup.BrickStairBlock.get())
+            .add(terracottaBlockGroup.BrickSlabBlock.get());
     }
 }
