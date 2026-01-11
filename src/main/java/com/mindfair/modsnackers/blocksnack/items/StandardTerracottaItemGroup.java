@@ -9,6 +9,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -17,10 +19,10 @@ public class StandardTerracottaItemGroup {
         Color = color;
         ItemRegister = itemRegister;
         BrickItem = registerTerracottaBrick();
-        BricksBlockItem = registerTerracottaBricks();
-        BrickStairBlockItem = registerTerracottaBrickStair();
-        BrickSlabBlockItem = registerTerracottaBrickSlab();
-        BrickWallBlockItem = registerTerracottaBrickWall();
+        BricksBlockItem = registerTerracottaBricks(ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BricksBlock);
+        BrickStairBlockItem = registerTerracottaBricks(ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickStairBlock);
+        BrickSlabBlockItem = registerTerracottaBricks(ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickSlabBlock);
+        BrickWallBlockItem = registerTerracottaBricks(ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickWallBlock);
     }
     public TerracottaColors Color;
     private DeferredRegister.Items ItemRegister;
@@ -40,28 +42,10 @@ public class StandardTerracottaItemGroup {
             )
         );
     }
-    private DeferredItem<BlockItem> registerTerracottaBricks() {
+    private DeferredItem<BlockItem> registerTerracottaBricks(DeferredBlock<? extends Block> block) {
         return ItemRegister.registerSimpleBlockItem(
-            TerracottaColors.getNameWithColorPrefix("terracotta_bricks", Color),
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BricksBlock
-        );
-    }
-    private DeferredItem<BlockItem> registerTerracottaBrickStair() {
-        return ItemRegister.registerSimpleBlockItem(
-            TerracottaColors.getNameWithColorPrefix("terracotta_brick_stair", Color),
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickStairBlock
-        );
-    }
-    private DeferredItem<BlockItem> registerTerracottaBrickSlab() {
-        return ItemRegister.registerSimpleBlockItem(
-            TerracottaColors.getNameWithColorPrefix("terracotta_brick_slab", Color),
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickSlabBlock
-        );
-    }
-    private DeferredItem<BlockItem> registerTerracottaBrickWall() {
-        return ItemRegister.registerSimpleBlockItem(
-            TerracottaColors.getNameWithColorPrefix("terracotta_brick_wall", Color),
-            ModBlocks.TERRACOTTA_BRICKS_LIST.get(Color).BrickWallBlock
+            block.getId().getPath(),
+            block
         );
     }
 }
