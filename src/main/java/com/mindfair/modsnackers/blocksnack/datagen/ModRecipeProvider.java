@@ -72,29 +72,28 @@ public class ModRecipeProvider extends RecipeProvider {
             default: throw new IllegalArgumentException(String.format("Unrecognized terracotta color '%s'", color.name()));
         }
     }
-    private void buildTerracottaBrickStonecutterRecipe(TerracottaColors color) {
-        DeferredItem<Item> brickItem = ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem;
-        SingleItemRecipeBuilder.stonecutting(getTerracottaIngredient(color), RecipeCategory.MISC, ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem, 4)
-            .unlockedBy(
-                getUnlockRuleName(brickItem),
-                this.has(brickItem)
-            )
-            .save(
-                this.output,
-                String.format(
-                    "%s_from_%s",
-                    TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
-                    TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
-                )
-            );
-    }
-
     private void configureAndSaveRecipe(RecipeBuilder recipeBuilder, DeferredItem<? extends Item> unlockingBrickItem, String recipeName) {
         recipeBuilder.unlockedBy(
                 getUnlockRuleName(unlockingBrickItem),
                 has(unlockingBrickItem)
             );
         recipeBuilder.save(output, recipeName);
+    }
+    private void buildTerracottaBrickStonecutterRecipe(TerracottaColors color) {
+        DeferredItem<Item> brickItem = ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem;
+        configureAndSaveRecipe(
+            SingleItemRecipeBuilder.stonecutting(
+                getTerracottaIngredient(color),
+                RecipeCategory.MISC,
+                ModItems.TERRACOTTA_ITEMS_LIST.get(color).BrickItem,
+                4),
+            brickItem,
+            String.format(
+                "%s_from_%s",
+                TerracottaColors.getNameWithColorPrefix("terracotta_brick", color),
+                TerracottaColors.getNameWithColorPrefix("terracotta_stonecutting", color)
+            )
+        );
     }
     private void buildTerracottaBricksRecipe(TerracottaColors color) {
         StandardTerracottaItemGroup terracottaItemGroup = ModItems.TERRACOTTA_ITEMS_LIST.get(color);
