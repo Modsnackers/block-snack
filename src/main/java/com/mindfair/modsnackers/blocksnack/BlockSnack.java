@@ -55,10 +55,12 @@ public class BlockSnack {
             ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickItem.get()));
         }
         if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.BUILDING_BLOCKS) {
-            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BricksBlockItem.get()));
-            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickStairBlockItem.get()));
-            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickSlabBlockItem.get()));
-            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> event.accept(itemGroup.BrickWallBlockItem.get()));
+            ModItems.TERRACOTTA_ITEMS_LIST.forEach((color, itemGroup) -> {
+                event.accept(itemGroup.BricksBlockItem.get());
+                event.accept(itemGroup.BrickStairBlockItem.get());
+                event.accept(itemGroup.BrickSlabBlockItem.get());
+                event.accept(itemGroup.BrickWallBlockItem.get());
+            });
         }
     }
 
